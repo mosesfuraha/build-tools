@@ -12,7 +12,6 @@ global.fetch = jest.fn(() =>
 
 describe("fetch and display tools", () => {
   beforeEach(() => {
-    // Set up the DOM element to contain the fetched content
     document.body.innerHTML = `
       <main id="content"></main>
     `;
@@ -26,9 +25,8 @@ describe("fetch and display tools", () => {
     await import("./index");
 
     expect(global.fetch).toHaveBeenCalledTimes(1);
-    expect(global.fetch).toHaveBeenCalledWith("./data/build-tools.json");
+    expect(global.fetch).toHaveBeenCalledWith("./data/tools.json");
 
-    // Check that the tools are displayed correctly in the DOM
     const content = document.getElementById("content");
     const listItems = content.querySelectorAll("li");
 
