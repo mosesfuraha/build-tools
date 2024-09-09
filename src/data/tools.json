@@ -1,0 +1,25 @@
+{
+  "tools": [
+    { "name": "Webpack" },
+    { "name": "Babel" },
+    { "name": "ESLint" },
+    { "name": "Jest" },
+    { "name": "Sass" },
+    { "name": "Lodash" },
+    { "name": "Webpack Dev Server" },
+    { "name": "CSS Loader" },
+    { "name": "Style Loader" },
+    { "name": "Sass Loader" },
+    { "name": "Clean Webpack Plugin" },
+    { "name": "Html Webpack Plugin" },
+    { "name": "Mini CSS Extract Plugin" },
+    { "name": "Terser Plugin" },
+    { "name": "CSS Minimizer Plugin" },
+
+    { "name": "Prettier" },
+
+    { "name": "Husky" },
+    { "name": "Lint-Staged" },
+    { "name": "JSDoc" }
+  ]
+}
