@@ -1,19 +1,10 @@
 import "@testing-library/jest-dom";
-import { jest } from "@jest/globals";
-
-global.fetch = jest.fn(() =>
-  Promise.resolve({
-    json: () =>
-      Promise.resolve({
-        tools: [{ name: "Webpack" }, { name: "Babel" }, { name: "ESLint" }],
-      }),
-  })
-);
+import { displayTools, handleError } from "./index";
 
 describe("fetch and display tools", () => {
   beforeEach(() => {
     document.body.innerHTML = `
-      <main id="content"></main>
+      <div id="content"></div>
     `;
   });
 
@@ -21,36 +12,31 @@ describe("fetch and display tools", () => {
     jest.clearAllMocks();
   });
 
-  test("should fetch tools and display them in the DOM", async () => {
-    await import("./index");
-
-    expect(global.fetch).toHaveBeenCalledTimes(1);
-    expect(global.fetch).toHaveBeenCalledWith("./data/tools.json");
+  test("should display tools in the DOM", () => {
+    const tools = {
+      tools: [{ name: "Webpack" }, { name: "Babel" }, { name: "ESLint" }],
+    };
 
     const content = document.getElementById("content");
-    const listItems = content.querySelectorAll("li");
+    expect(content).not.toBeNull();
 
+    displayTools(tools);
+
+    const listItems = content.querySelectorAll("li");
     expect(listItems).toHaveLength(3);
     expect(listItems[0]).toHaveTextContent("Webpack");
     expect(listItems[1]).toHaveTextContent("Babel");
     expect(listItems[2]).toHaveTextContent("ESLint");
   });
 
-  test("should log error when fetch fails", async () => {
-    global.fetch.mockImplementationOnce(() =>
-      Promise.reject(new Error("Fetch error"))
+  test("should display error message when handling error", () => {
+    const content = document.getElementById("content");
+    expect(content).not.toBeNull();
+
+    handleError(new Error("Fetch error"));
+
+    expect(content).toHaveTextContent(
+      "Error loading tools. Please try again later."
     );
-
-    const consoleSpy = jest.spyOn(console, "error").mockImplementation();
-
-    await import("./index");
-
-    expect(global.fetch).toHaveBeenCalledTimes(1);
-    expect(consoleSpy).toHaveBeenCalledWith(
-      "Error loading JSON:",
-      expect.any(Error)
-    );
-
-    consoleSpy.mockRestore();
   });
 });

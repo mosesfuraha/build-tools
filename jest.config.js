@@ -1,3 +1,5 @@
+const path = require("path");
+
 module.exports = {
   testEnvironment: "jsdom",
   transform: {
@@ -5,6 +7,11 @@ module.exports = {
   },
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
   moduleNameMapper: {
-    "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+    "\\.(css|less|sass|scss)$": path.resolve(
+      __dirname,
+      "__mocks__/styleMock.js"
+    ),
   },
+  testPathIgnorePatterns: ["/node_modules/", "/dist/"],
+  verbose: true,
 };
