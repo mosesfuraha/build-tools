@@ -1,29 +1,42 @@
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: "./src/index.ts", // Assuming your entry point is a TypeScript file
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
+    clean: true,
+  },
+  resolve: {
+    extensions: [".ts", ".js"],
   },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.ts$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-        },
+        use: "ts-loader",
       },
       {
         test: /\.scss$/,
         use: ["style-loader", "css-loader", "sass-loader"],
       },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env"],
+          },
+        },
+      },
     ],
   },
-  mode: "development", 
-  devServer: {
-    static: path.resolve(__dirname, "dist"),
-    port: 8080,
-  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./index.html", // Adjust the path as needed
+    }),
+  ],
 };

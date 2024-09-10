@@ -37,7 +37,6 @@ export function loadTools() {
     .catch(handleError);
 }
 
-// Only run this if we're in a browser environment
 if (typeof window !== "undefined") {
   window.addEventListener("DOMContentLoaded", loadTools);
 }
