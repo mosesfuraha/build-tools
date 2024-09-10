@@ -13,3 +13,5 @@ Follow these steps to set up and run the project locally:
    git clone https://github.com/your-username/build-tools-showcase.git
    cd build-tools-showcase
    ```
+
+Now, the setup commands are (`npm install`, `npm start`, `npm test`, `npm run lint`)
