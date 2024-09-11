@@ -14,7 +14,7 @@ Follow these steps to set up and run the project locally:
    cd build-tools-showcase
    ```
 2. **Deployed version:**
-   Here is the deployed link https://build-showcase.netlify.app/
+   [Here is the deployed link](https://build-showcase.netlify.app/)
    Now, the setup commands are (`npm install`, `npm start`, `npm test`, `npm run lint`)
 
 3. **Install dependencies:**
